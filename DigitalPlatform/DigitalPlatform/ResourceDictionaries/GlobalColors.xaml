@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Color x:Key="PrimaryColor">#2C3D55</Color>
+    <Color x:Key="SecondaryColor">#3E4C5E</Color>
+    <Color x:Key="PrimaryTextColor">#090C08</Color>
+    <Color x:Key="SecondaryTextColor">White</Color>
+    <Color x:Key="InvalidTextColor">Red</Color>
+    <Color x:Key="BackgroundColor">#536271</Color>
+    <Color x:Key="StartPageBackgroundColor">#2C3D55</Color>
+    <Color x:Key="PrimaryButtonColor">#6A687A</Color>
+    <Color x:Key="FacebookButtonBackgroundColor">#3b5998</Color>
+    <Color x:Key="GoogleButtonBackgroundColor">White</Color>
+    <Color x:Key="LoadingBackgroundColor">#000000</Color>
+    <Color x:Key="LoadingSpinnerColor">#2C3D55</Color>
+</ResourceDictionary>

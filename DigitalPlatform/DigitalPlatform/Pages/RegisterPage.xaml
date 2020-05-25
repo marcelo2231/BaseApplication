@@ -1,0 +1,128 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="clr-namespace:DigitalPlatform.Helpers;assembly=DigitalPlatform"
+             xmlns:controls="clr-namespace:DigitalPlatform.Controls"
+             mc:Ignorable="d"
+             x:Class="DigitalPlatform.Pages.RegisterPage"
+             Title="{Binding Title}"
+             BackgroundColor="{DynamicResource StartPageBackgroundColor}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <StackLayout Spacing="15"
+                         Margin="15,25">
+                <Label Text="{helpers:Translate RegisterPageTitle}"
+                       TextColor="{DynamicResource SecondaryTextColor}"
+                       FontSize="25"
+                       Margin="0,0,0,35"/>
+                <ScrollView>
+                    <StackLayout Spacing="15">
+                        <controls:SpecialEntry Title="{helpers:Translate EmailAddress}"
+                                               TitleFontSize="15"
+                                               Grid.Row="0"
+                                               TitleTextColor="{DynamicResource SecondaryTextColor}"
+                                               EntryTextColor="{DynamicResource SecondaryTextColor}"
+                                               Entry="{Binding UserModel.EmailAddress.Value, Mode=TwoWay}"
+                                               ValidationErrorColor="{DynamicResource InvalidTextColor}"
+                                               ValidationErrorText="{helpers:Translate InvalidEmailAddressError}"
+                                               IsValid="{Binding UserModel.EmailAddress.IsValid, Mode=TwoWay}"
+                                               ValidateCommand="{Binding UserModel.EmailAddress.ValidateCommand, Mode=TwoWay}" />
+
+                        <controls:SpecialEntry Title="{helpers:Translate FirstName}"
+                                               TitleFontSize="15"
+                                               Grid.Row="0"
+                                               TitleTextColor="{DynamicResource SecondaryTextColor}"
+                                               EntryTextColor="{DynamicResource SecondaryTextColor}"
+                                               Entry="{Binding UserModel.FirstName.Value, Mode=TwoWay}"
+                                               ValidationErrorColor="{DynamicResource InvalidTextColor}"
+                                               ValidationErrorText="{helpers:Translate InvalidFirstNameError}"
+                                               IsValid="{Binding UserModel.FirstName.IsValid, Mode=TwoWay}"
+                                               ValidateCommand="{Binding UserModel.FirstName.ValidateCommand, Mode=TwoWay}" />
+
+                        <controls:SpecialEntry Title="{helpers:Translate LastName}"
+                                               TitleFontSize="15"
+                                               Grid.Row="0"
+                                               TitleTextColor="{DynamicResource SecondaryTextColor}"
+                                               EntryTextColor="{DynamicResource SecondaryTextColor}"
+                                               Entry="{Binding UserModel.LastName.Value, Mode=TwoWay}"
+                                               ValidationErrorColor="{DynamicResource InvalidTextColor}"
+                                               ValidationErrorText="{helpers:Translate InvalidLastNameError}"
+                                               IsValid="{Binding UserModel.LastName.IsValid, Mode=TwoWay}"
+                                               ValidateCommand="{Binding UserModel.LastName.ValidateCommand, Mode=TwoWay}" />
+                
+                        <controls:SpecialEntry Title="{helpers:Translate PhoneNumber}"
+                                               TitleFontSize="15"
+                                               Grid.Row="0"
+                                               Keyboard="Numeric"
+                                               TitleTextColor="{DynamicResource SecondaryTextColor}"
+                                               EntryTextColor="{DynamicResource SecondaryTextColor}"
+                                               Entry="{Binding UserModel.PhoneNumber.Value, Mode=TwoWay}"
+                                               ValidationErrorColor="{DynamicResource InvalidTextColor}"
+                                               ValidationErrorText="{helpers:Translate InvalidPhoneNumberError}"
+                                               IsValid="{Binding UserModel.PhoneNumber.IsValid, Mode=TwoWay}"
+                                               ValidateCommand="{Binding UserModel.PhoneNumber.ValidateCommand, Mode=TwoWay}" />
+
+                        <controls:SpecialEntry Title="{helpers:Translate Password}"
+                                               TitleFontSize="15"
+                                               IsPassword="True"
+                                               Grid.Row="1"
+                                               IsHidden="True"
+                                               ImageTintColor="{DynamicResource SecondaryTextColor}"
+                                               TitleTextColor="{DynamicResource SecondaryTextColor}"
+                                               EntryTextColor="{DynamicResource SecondaryTextColor}"
+                                               Entry="{Binding UserModel.Password.Value, Mode=TwoWay}"
+                                               ValidationErrorColor="{DynamicResource InvalidTextColor}"
+                                               ValidationErrorText="{helpers:Translate InvalidPasswordError}"
+                                               IsValid="{Binding UserModel.Password.IsValid, Mode=TwoWay}"
+                                               ValidateCommand="{Binding UserModel.Password.ValidateCommand, Mode=TwoWay}" />
+
+                        <StackLayout Orientation="Horizontal"
+                                     Spacing="0"
+                                     Margin="0,10,0,0">
+                            <controls:CheckboxLabelControl Text="{helpers:Translate AgreeWithTermsOfService}"
+                                                               IsChecked="{Binding AcceptedTerms, Mode=TwoWay}"
+                                                               TextColor="{DynamicResource SecondaryTextColor}"
+                                                               TintColor="{DynamicResource SecondaryTextColor}"
+                                                               FontSize="12"
+                                                               ImageHeight="20"
+                                                               ImageWidth="20" />
+                            <controls:ClickableLabel Text="{helpers:Translate TermsOfServiceLabel}"
+                                                     TextColor="{DynamicResource SecondaryTextColor}"
+                                                     FontSize="12"/>
+
+                        </StackLayout>
+                    </StackLayout>
+                </ScrollView>
+            </StackLayout>
+            <controls:CenteredImageButton HorizontalOptions="EndAndExpand"
+                                          VerticalOptions="EndAndExpand"
+                                          Grid.Row="1"
+                                          Margin="15"
+                                          HeightRequest="50"
+                                          WidthRequest="50"
+                                          BtnCornerRadius="25"
+                                          BorderWidth="1"
+                                          BtnBorderColor="{DynamicResource SecondaryTextColor}"
+                                          Image="rightArrow.svg"
+                                          ImageHeight="30"
+                                          ImageWidth="30"
+                                          ImageColor="{DynamicResource SecondaryTextColor}"
+                                          BackgroundColor="{DynamicResource SecondaryTextColor}"
+                                          BackgroundOpacity="0.5"
+                                          Command="{Binding RegisterCommand}"/>
+
+            <controls:LoadingScreenControl Grid.Row="0"
+                                           Grid.RowSpan="2"
+                                           IsVisible="{Binding IsBusy, Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy, Mode=TwoWay}"
+                                           Text="{helpers:Translate LoadingMessage}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

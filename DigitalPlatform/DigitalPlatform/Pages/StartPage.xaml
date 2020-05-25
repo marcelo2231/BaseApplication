@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:helpers="clr-namespace:DigitalPlatform.Helpers;assembly=DigitalPlatform"
+             xmlns:controls="clr-namespace:DigitalPlatform.Controls"
+             mc:Ignorable="d"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             ios:Page.UseSafeArea="true"
+             BackgroundColor="{DynamicResource StartPageBackgroundColor}"
+             x:Class="DigitalPlatform.Pages.StartPage"
+             Title="{Binding Title}">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackLayout>
+                <controls:ClickableLabel Text="{helpers:Translate Login}"
+                                         Command="{Binding NavigateToLoginPageCommand}"
+                                         TextColor="{DynamicResource SecondaryTextColor}"
+                                         Underline="False"
+                                         HorizontalOptions="EndAndExpand"
+                                         Margin="0,25,10,0"/>
+
+                <controls:TintableImage HorizontalOptions="CenterAndExpand"
+                                        TintColor="{DynamicResource SecondaryTextColor}"
+                                        Source="logo.svg"
+                                        Margin="0,35,0,0"
+                                        WidthRequest="250"
+                                        HeightRequest="250"/>
+                <Label HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="StartAndExpand"
+                       Margin="0,0,0,0"
+                       Text="{helpers:Translate ApplicationName}"
+                       TextColor="{DynamicResource SecondaryTextColor}"
+                       FontSize="40"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10"
+                         Margin="10"
+                         Grid.Row="1">
+                <controls:CenteredImageButton Text="{helpers:Translate FacebookButtonText}"
+                                              BackgroundColor="{DynamicResource FacebookButtonBackgroundColor}"
+                                              TextColor="{DynamicResource SecondaryTextColor}"
+                                              BtnCornerRadius="20"
+                                              ImageHeight="30"
+                                              ImageWidth="30"
+                                              Spacing="10"
+                                              Image="facebook.svg"
+                                              Command="{Binding FacebookLoginCommand}"/>
+
+                <controls:CenteredImageButton Text="{helpers:Translate GoogleButtonText}"
+                                              BackgroundColor="{DynamicResource GoogleButtonBackgroundColor}"
+                                              TextColor="{DynamicResource FacebookButtonBackgroundColor}"
+                                              BtnCornerRadius="20"
+                                              ImageHeight="30"
+                                              ImageWidth="30"
+                                              Spacing="15"
+                                              Image="google.svg"
+                                              Command="{Binding GoogleLoginCommand}"/>
+
+                <controls:CenteredImageButton Text="{helpers:Translate CreateAccountText}"
+                                              BackgroundColor="Transparent"
+                                              TextColor="{DynamicResource SecondaryTextColor}"
+                                              BtnBorderColor="{DynamicResource SecondaryTextColor}"
+                                              BorderWidth="1"
+                                              BtnCornerRadius="20"
+                                              Command="{Binding NavigateToRegisterPageCommand}"/>
+            </StackLayout>
+
+            <controls:LoadingScreenControl Grid.Row="0"
+                                           Grid.RowSpan="2"
+                                           IsVisible="{Binding IsBusy, Mode=TwoWay}"
+                                           IsRunning="{Binding IsBusy, Mode=TwoWay}"
+                                           Text="{helpers:Translate LoadingMessage}"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
