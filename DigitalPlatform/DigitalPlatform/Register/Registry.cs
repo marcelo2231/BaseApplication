@@ -15,6 +15,9 @@ using DigitalPlatform.Validations;
 using DigitalPlatform.ViewModels.Interfaces.Users;
 using DigitalPlatform.ViewModels.Users;
 using Xamarin.Forms;
+using BusinessModels;
+using BusinessControllers.Interfaces.Session;
+using BusinessControllers.Session;
 
 namespace DigitalPlatform.Register
 {
@@ -36,6 +39,7 @@ namespace DigitalPlatform.Register
              ************************************************************/
             containerRegistry.Register<ILoginPageViewModel, LoginPageViewModel>();
             containerRegistry.Register<IRegisterPageViewModel, RegisterPageViewModel>();
+            containerRegistry.Register<ISessionController, SessionController>();
             containerRegistry.Register<IStartPageViewModel, StartPageViewModel>();
 
 
@@ -57,6 +61,7 @@ namespace DigitalPlatform.Register
             /************************************************************
              *                    Keep it alphabetized
              ************************************************************/
+            containerRegistry.RegisterInstance(new SessionContextBusinessModel());
             containerRegistry.RegisterInstance<ITypeResolver>(new TypeResolver());
 
         }

@@ -64,9 +64,12 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Firebase\FirebaseAuthenticator.cs" />
+    <Compile Include="Firebase\FirebaseService.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
+    <BundleResource Include="GoogleService-Info.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -130,11 +133,18 @@
     <PackageReference Include="Prism.DryIoc.Forms">
       <Version>7.2.0.1367</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.Firebase.iOS.Auth">
+      <Version>6.5.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="4.4.0.991265" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessControllers.Interfaces\BusinessControllers.Interfaces.csproj">
+      <Project>{1778f276-ae81-4201-8379-939656adb74b}</Project>
+      <Name>BusinessControllers.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DigitalPlatform\DigitalPlatform.csproj">
       <Project>{80BDDC24-7F49-411C-91B8-545425596A80}</Project>
       <Name>DigitalPlatform</Name>
@@ -163,9 +173,9 @@
     <BundleResource Include="Resources\unchecked.svg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\splash_logo.png" />
+    <BundleResource Include="Resources\logo.svg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\logo.svg" />
+    <BundleResource Include="Resources\splash_logo.png" />
   </ItemGroup>
 </Project>

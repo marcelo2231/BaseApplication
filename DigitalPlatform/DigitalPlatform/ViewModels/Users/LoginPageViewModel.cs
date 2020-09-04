@@ -12,6 +12,9 @@ using System.ComponentModel;
 using DigitalPlatform.Properties;
 using DigitalPlatform.ViewModels.Interfaces.Users;
 using Xamarin.Forms;
+using System;
+using BusinessControllers.Interfaces.Session;
+using System.Threading.Tasks;
 
 namespace DigitalPlatform.ViewModels.Users
 {
@@ -25,6 +28,7 @@ namespace DigitalPlatform.ViewModels.Users
         
         private UserLoginModel _userModel = new UserLoginModel();
         private bool _acceptedTerms;
+        private readonly ISessionController _sessionController;
 
         #endregion
 
@@ -38,7 +42,7 @@ namespace DigitalPlatform.ViewModels.Users
         /// <summary>
         ///     Gets the login command.
         /// </summary>
-        public Command LoginCommand => new Command(login);
+        public Command LoginCommand => new Command(async () => await login());
 
         /// <summary>
         ///     Gets/sets user information.
@@ -68,9 +72,12 @@ namespace DigitalPlatform.ViewModels.Users
         ///     Default Constructor.
         /// </summary>
         /// <param name="navigationService">The navigation service.</param>
-        public LoginPageViewModel(INavigationService navigationService) : base(navigationService)
+        public LoginPageViewModel(INavigationService navigationService,
+            ISessionController sessionController) : base(navigationService)
         {
             Resources.ResourceManager.GetString("LoginPageTitle");
+
+            _sessionController = sessionController ?? throw new ArgumentNullException(nameof(sessionController));
         }
 
         #endregion
@@ -90,7 +97,7 @@ namespace DigitalPlatform.ViewModels.Users
         /// <summary>
         ///     Login User.
         /// </summary>
-        private void login()
+        private async Task login()
         {
             IsBusy = true;
 
@@ -104,7 +111,7 @@ namespace DigitalPlatform.ViewModels.Users
 
             if (UserModel.EmailAddress.Validate() & UserModel.Password.Validate())
             {
-
+                var result = await _sessionController.LoginUserAsync(UserModel.EmailAddress.Value, UserModel.Password.Value);
             }
 
             IsBusy = false;

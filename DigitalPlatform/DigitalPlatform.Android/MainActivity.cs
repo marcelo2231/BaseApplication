@@ -11,7 +11,10 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
+using BusinessControllers.Interfaces.Firebase;
+using DigitalPlatform.Droid.Firebase;
 using FFImageLoading.Forms.Platform;
+using Firebase;
 using Prism;
 using Prism.Ioc;
 
@@ -37,7 +40,9 @@ namespace DigitalPlatform.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             CachedImageRenderer.Init(true);
+            FirebaseApp.InitializeApp(Application.Context);
 
             var application = new App(new AndroidInitializer());
             await application.StartAsync();
@@ -70,7 +75,7 @@ namespace DigitalPlatform.Droid
         /// </summary>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.Register<IFirebaseAuthenticator, FirebaseAuthenticator>();
         }
 
         #endregion

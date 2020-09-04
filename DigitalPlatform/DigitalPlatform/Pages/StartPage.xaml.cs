@@ -29,15 +29,8 @@ namespace DigitalPlatform.Pages
         ///</summary>
         public StartPage()
         {
-            try
-            {
-                InitializeComponent();
-                NavigationPage.SetHasNavigationBar(this, false);
-            }
-            catch(Exception e)
-            {
-
-            }
+            InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         #endregion

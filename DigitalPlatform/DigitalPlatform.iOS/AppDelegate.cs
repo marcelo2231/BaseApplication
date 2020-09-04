@@ -7,7 +7,8 @@
 
 #endregion
 
-using FFImageLoading.Forms.Platform;
+using BusinessControllers.Interfaces.Firebase;
+using DigitalPlatform.iOS.Firebase;
 using Foundation;
 using Prism;
 using Prism.Ioc;
@@ -44,6 +45,7 @@ namespace DigitalPlatform.iOS
         private async Task loadApplicationAsync()
         {
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
+            Firebase.Core.App.Configure();
 
             var application = new App(new iOSInitializer());
             await application.StartAsync().ConfigureAwait(false);
@@ -64,7 +66,7 @@ namespace DigitalPlatform.iOS
         /// </summary>
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-
+            containerRegistry.Register<IFirebaseAuthenticator, FirebaseAuthenticator>();
         }
 
         #endregion

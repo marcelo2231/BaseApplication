@@ -13,6 +13,9 @@ using DigitalPlatform.Pages;
 using DigitalPlatform.Properties;
 using DigitalPlatform.ViewModels.Interfaces.Users;
 using Xamarin.Forms;
+using BusinessControllers.Interfaces.Session;
+using System;
+using System.Threading.Tasks;
 
 namespace DigitalPlatform.ViewModels.Users
 {
@@ -23,6 +26,8 @@ namespace DigitalPlatform.ViewModels.Users
     public class StartPageViewModel : ViewModelBase, IStartPageViewModel
     {
         #region Fields
+
+        private readonly ISessionController _sessionController;
 
         #endregion
 
@@ -46,7 +51,7 @@ namespace DigitalPlatform.ViewModels.Users
         /// <summary>
         ///     Gets the google login command.
         /// </summary>
-        public Command GoogleLoginCommand => new Command(navigateGoogleLogin);
+        public Command GoogleLoginCommand => new Command(async () => await navigateGoogleLoginAsync());
 
         #endregion
 
@@ -58,9 +63,12 @@ namespace DigitalPlatform.ViewModels.Users
         ///     Default Constructor.
         /// </summary>
         /// <param name="navigationService">The navigation service.</param>
-        public StartPageViewModel(INavigationService navigationService) : base(navigationService)
+        public StartPageViewModel(INavigationService navigationService,
+            ISessionController sessionController) : base(navigationService)
         {
             Resources.ResourceManager.GetString("StartPageTitle");
+
+            _sessionController = sessionController ?? throw new ArgumentNullException(nameof(sessionController));
         }
 
         #endregion
@@ -104,11 +112,11 @@ namespace DigitalPlatform.ViewModels.Users
         /// <summary>
         ///     Navigates to google login.
         /// </summary>
-        private void navigateGoogleLogin()
+        private async Task navigateGoogleLoginAsync()
         {
             IsBusy = true;
 
-
+            var result = await _sessionController.LoginUserWithGoogleAsync();
 
             IsBusy = false;
         }

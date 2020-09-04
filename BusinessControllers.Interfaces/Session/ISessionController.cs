@@ -27,6 +27,11 @@ namespace BusinessControllers.Interfaces.Session
         Task<bool> LoginUserAsync(string username, string password);
 
         ///<summary>
+        ///    Logs in the user with google async.
+        ///</summary>
+        Task<bool> LoginUserWithGoogleAsync();
+
+        ///<summary>
         ///    Logs out the user async.
         ///</summary>
         Task<bool> LogoutUserAsync();

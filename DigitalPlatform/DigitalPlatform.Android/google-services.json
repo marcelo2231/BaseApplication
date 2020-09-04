@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "510537894053",
+    "firebase_url": "https://digitalplatform-16831.firebaseio.com",
+    "project_id": "digitalplatform-16831",
+    "storage_bucket": "digitalplatform-16831.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:510537894053:android:2e18074de217c0022de54c",
+        "android_client_info": {
+          "package_name": "com.companyname.DigitalPlatform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "510537894053-b7ihbvgsuutjpgej5kj554b3nl3vp0c0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.companyname.DigitalPlatform",
+            "certificate_hash": "f6a0c8a719996a610fdc9ba9bc35904ed002ed61"
+          }
+        },
+        {
+          "client_id": "510537894053-o62ncc7frfv2slu97pho7galrupplq67.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHw72D4WKK-HBMI6Qj6qY9Gcn_riNzuMg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "510537894053-o62ncc7frfv2slu97pho7galrupplq67.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

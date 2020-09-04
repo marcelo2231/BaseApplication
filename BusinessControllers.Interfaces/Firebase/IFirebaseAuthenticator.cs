@@ -6,20 +6,16 @@
 // ==================================================================================================
 
 #endregion
-namespace BusinessModels
+
+using System.Threading.Tasks;
+
+namespace BusinessControllers.Interfaces.Firebase
 {
-    ///<summary>
-    ///    The <cref="SessionContextBusinessModel"/> interface.
-    ///</summary>
-    public class SessionContextBusinessModel
+    public interface IFirebaseAuthenticator
     {
-        #region Properties
-
-        /// <summary>
-        ///     The currenct session token.
-        /// </summary>
-        public string Token { get; set; }
-
-        #endregion
+        bool IsSignIn();
+        bool SignOut();
+        Task<string> LoginWithEmailPassword(string email, string password);
+        Task<string> LoginWithGoogleAccount();
     }
 }

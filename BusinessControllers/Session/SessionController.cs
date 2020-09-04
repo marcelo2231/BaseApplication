@@ -7,8 +7,10 @@
 
 #endregion
 
+using BusinessControllers.Interfaces.Firebase;
 using BusinessControllers.Interfaces.Session;
 using BusinessModels;
+using System;
 using System.Threading.Tasks;
 
 namespace BusinessControllers.Session
@@ -18,6 +20,13 @@ namespace BusinessControllers.Session
     ///</summary>
     public class SessionController : ISessionController
     {
+        #region Fields
+
+        private readonly IFirebaseAuthenticator _firebaseAuthenticator;
+        private readonly SessionContextBusinessModel _sessionContextBusinessModel;
+
+        #endregion
+
         #region Methods
 
         #region Constructor
@@ -25,8 +34,12 @@ namespace BusinessControllers.Session
         ///<summary>
         ///    The <cref="SessionController"/> constructor.
         ///</summary>
-        public SessionController()
+        /// <param name="firebaseAuthenticator">The firebase authenticator.</param>
+        public SessionController(IFirebaseAuthenticator firebaseAuthenticator,
+            SessionContextBusinessModel sessionContextBusinessModel)
         {
+            _firebaseAuthenticator = firebaseAuthenticator ?? throw new ArgumentNullException(nameof(firebaseAuthenticator));
+            _sessionContextBusinessModel = sessionContextBusinessModel ?? throw new ArgumentNullException(nameof(sessionContextBusinessModel));
         }
 
 
@@ -39,7 +52,26 @@ namespace BusinessControllers.Session
         /// <param name="password">The password.</param>
         public async Task<bool> LoginUserAsync(string username, string password)
         {
+            var result = await _firebaseAuthenticator.LoginWithEmailPassword(username, password);
 
+            if (string.IsNullOrWhiteSpace(result))
+                return false;
+
+            _sessionContextBusinessModel.Token = result;
+            return true;
+        }
+
+        ///<summary>
+        ///    Logs in the user with google async.
+        ///</summary>
+        public async Task<bool> LoginUserWithGoogleAsync()
+        {
+            var result = await _firebaseAuthenticator.LoginWithGoogleAccount();
+
+            if (string.IsNullOrWhiteSpace(result))
+                return false;
+
+            _sessionContextBusinessModel.Token = result;
             return true;
         }
 

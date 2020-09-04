@@ -19,6 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\BusinessControllers.Interfaces\BusinessControllers.Interfaces.csproj" />
+    <ProjectReference Include="..\..\BusinessControllers\BusinessControllers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Pages\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
     </Compile>
